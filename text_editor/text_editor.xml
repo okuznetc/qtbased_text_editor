@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<settings>
+        <syntaxes>
+                <syntax id = "python" name = "Язык программирования Python" ext_list="py">
+
+                    <!-- Ключевые слова -->
+
+                    <rule>
+                        <pattern value = "\bclass\b"/>
+                        <format foreground="#00008B" font_weight="75"/>
+                    </rule>
+
+                    <!-- Однострочный комментарий -->
+
+                    <rule>
+                        <pattern value = "#[^\n]*"/>
+                        <format foreground="#008000" font_weight="75"/>
+                   </rule>
+
+                </syntax>
+
+
+                <syntax id = "C++" name = "Язык программирования C++" ext_list = "cpp hpp h">
+
+                    <rule>
+                            <pattern value = "\bclass\|\bauto\b|\bconst\b|\benum\b|\bexplicit\b|
+                                              \bfriend\b|\binline\b|\bprivate\b|\bprotected\b|\bpublic\b|\bstatic\b|
+                                              \bstruct\b|\btemplate\b|\btypename\b|\bunion\b|\bvirtual\b|\bvolatile\b|
+                                              \bfalse\b|\bfor\b|\bnullptr\b|\boperator\b|\bor\b|\breturn\b|
+                                              \bcontinue\b|\bdefault\b|\bdelete\b|\bdo\b|\belse\b|\bif\b|
+                                              \bnamespace\b|\bnew\b|\bnot\b|\bswitch\b|\bthis\b|\bthrow\b|
+                                              \btrue\b|\btry\b|\btypedef\b|\busing\b|\bwhile\b|\bxor\b|\bNULL\b"/>
+                            <format foreground="#ff181b" font_weight="700"/>
+                    </rule>
+                    <rule>
+                            <pattern value = "\bbool\b|\bchar\b|\bdouble\b|\bfloat\b|\bint\b|\blong\b|
+                                              \bshort\b|\bsigned\b|\bunsigned\b|\bvoid\b"/>
+                            <format foreground="#ffc418" font_weight="700"/>
+                    </rule>
+                    <rule>
+                            <pattern value = "//[^\n]*"/>
+                            <format foreground="#008000" font_weight="75"/>
+                    </rule>
+                    <rule>
+                            <pattern value = "\bQ[A-Za-z]+\b"/>
+                            <format foreground="#d718ff" font_weight="75"/>
+                    </rule>
+                    <rule>
+                            <pattern value = "#[^\n]*"/>
+                            <format foreground="#1c7337" font_weight="700"/>
+                    </rule>
+                    <rule>
+                            <pattern value = "\b[A-Za-z0-9_]+(?=\()"/>
+                            <format foreground="#1842ff" font_weight="700"/>
+                    </rule>
+                    <startComment>
+                            <pattern value = "/\*"/>
+                    </startComment>
+                    <endComment>
+                            <pattern value = "\*/"/>
+                    </endComment>
+                    <multiLineComment>
+                            <format foreground="#a0a0a4"/>
+                    </multiLineComment>
+                </syntax>
+        </syntaxes>
+</settings>
