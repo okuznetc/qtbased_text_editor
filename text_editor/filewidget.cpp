@@ -21,28 +21,6 @@ void FileWidget::fromFileToWidget()
     file.close();
     document()->setPlainText(content);
 
-//    // Может быть куча проблем с кодировкой файла. Есть неидеальное, но решение отсюда:
-//    // https://stackoverflow.com/questions/18226858/detect-text-file-encoding
-//    QTextCodec::ConverterState state;
-//    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-//    if (!codec) {
-//        QMessageBox::warning(this, "Ошибка", "Проблема с кодировкой при чтении файла.");
-//        return;
-//    }
-//    QString text = codec->toUnicode(content.constData(), content.size(), &state);
-//    if (state.invalidChars > 0) {
-//        // Not a UTF-8 text - using system default locale
-//        QTextCodec * codec = QTextCodec::codecForLocale();
-//        if (!codec) {
-//            QMessageBox::warning(this, "Ошибка", "Проблема с кодировкой при чтении файла.");
-//            return;
-//        }
-//        document()->setPlainText(codec->toUnicode(content));
-//    }
-//    else {
-//        document()->setPlainText(text);
-//    }
-
     document()->setModified(0);
 }
 
@@ -168,7 +146,7 @@ void FileWidget::setupTextEdit()
     if(isBinded()) {
         highlighter = new Highlighter(document());
         if(!highlighter->setSyntaxSettings(QFileInfo(currfilepath).suffix())) {
-            QMessageBox::warning(this, "Ошибка", "Проблема с XML файлом настроек.");
+            QMessageBox::warning(this, tr("Ошибка"), tr("Проблема с XML файлом настроек."));
         }
     }
 

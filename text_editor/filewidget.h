@@ -2,7 +2,6 @@
 #define FILEWIDGET_H
 
 #include <QPlainTextEdit>
-#include <QTextCodec>
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QPainter>
@@ -10,7 +9,6 @@
 #include "highlighter.h"
 
 class FileWidget;
-
 
 class LineNumberArea : public QWidget
 {

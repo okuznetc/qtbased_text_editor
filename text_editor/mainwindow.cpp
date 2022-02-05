@@ -10,26 +10,26 @@ MainWindow::MainWindow(QWidget *parent)
     // Создание и настройка меню
     QMenu* menu = nullptr;
     QToolBar* toolbar = nullptr;
-    menu = menuBar()->addMenu("Файл"); toolbar = addToolBar("Файл");
+    menu = menuBar()->addMenu(tr("Файл")); toolbar = addToolBar(tr("Файл"));
     toolbar->addAction(menu->addAction(QIcon(":/images/filenew.png"),"Новый",this,&MainWindow::onNewFile,QKeySequence::New));
     toolbar->addAction(menu->addAction(QIcon(":/images/fileopen.png"),"Открыть",this,&MainWindow::onOpenFile,QKeySequence::Open));
     toolbar->addAction(menu->addAction(QIcon(":/images/filesave.png"),"Сохранить",this,&MainWindow::onSaveFile,QKeySequence::Save));
     toolbar->addAction(menu->addAction(QIcon(":/images/save_all.png"),"Сохранить все",this,&MainWindow::onSaveAllFiles,QKeySequence()));
-    menu->addAction(QIcon(),"Сохранить как",this,&MainWindow::onSaveFileAs,QKeySequence::SaveAs);
-    menu->addAction(QIcon(),"Закрыть",this,&MainWindow::onCloseFile,Qt::CTRL | Qt::Key_W);
-    menu->addAction(QIcon(),"Закрыть все",this,&MainWindow::onCloseAllFiles,QKeySequence());
-    menu->addAction(QIcon(),"Выход",this,&MainWindow::close,QKeySequence::Quit);
+    menu->addAction(QIcon(),tr("Сохранить как"),this,&MainWindow::onSaveFileAs,QKeySequence::SaveAs);
+    menu->addAction(QIcon(),tr("Закрыть"),this,&MainWindow::onCloseFile,Qt::CTRL | Qt::Key_W);
+    menu->addAction(QIcon(),tr("Закрыть все"),this,&MainWindow::onCloseAllFiles,QKeySequence());
+    menu->addAction(QIcon(),tr("Выход"),this,&MainWindow::close,QKeySequence::Quit);
 
-    menu = menuBar()->addMenu("Правка");
-    menu->addAction(QIcon(),"Вырезать",this,&MainWindow::onCut,QKeySequence::Cut);
-    menu->addAction(QIcon(),"Копировать",this,&MainWindow::onCopy,QKeySequence::Copy);
-    menu->addAction(QIcon(),"Вставить",this,&MainWindow::onPaste,QKeySequence::Paste);
-    menu->addAction(QIcon(),"Удалить",this,&MainWindow::onDelete,QKeySequence::Delete);
-    menu->addAction(QIcon(),"Выделить все",this,&MainWindow::onSelectAll,QKeySequence::SelectAll);
+    menu = menuBar()->addMenu(tr("Правка"));
+    menu->addAction(QIcon(),tr("Вырезать"),this,&MainWindow::onCut,QKeySequence::Cut);
+    menu->addAction(QIcon(),tr("Копировать"),this,&MainWindow::onCopy,QKeySequence::Copy);
+    menu->addAction(QIcon(),tr("Вставить"),this,&MainWindow::onPaste,QKeySequence::Paste);
+    menu->addAction(QIcon(),tr("Удалить"),this,&MainWindow::onDelete,QKeySequence::Delete);
+    menu->addAction(QIcon(),tr("Выделить все"),this,&MainWindow::onSelectAll,QKeySequence::SelectAll);
 
-    menu = menuBar()->addMenu("Вид");
-    menu->addAction(QIcon(),"Показать проводник",this,&MainWindow::onShowExplorer,QKeySequence())->setCheckable(1);
-    menu->addAction(QIcon(),"Показать обозреватель открытых документов",this,&MainWindow::onShowViewer,QKeySequence())->setCheckable(1);
+    menu = menuBar()->addMenu(tr("Вид"));
+    menu->addAction(QIcon(),tr("Показать проводник"),this,&MainWindow::onShowExplorer,QKeySequence())->setCheckable(1);
+    menu->addAction(QIcon(),tr("Показать обозреватель открытых документов"),this,&MainWindow::onShowViewer,QKeySequence())->setCheckable(1);
     for(int i=0; i<menu->actions().count(); i++) menu->actions().at(i)->setChecked(1);
 
     // Настройка проводника и обозревателя
@@ -43,10 +43,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->listView->setModel(new QStringListModel(openedfiles));
 
-    ui->fileExplorer->setWindowTitle("Проводник");
-    ui->fileViewer->setWindowTitle("Обозреватель открытых документов");
+    ui->fileExplorer->setWindowTitle(tr("Проводник"));
+    ui->fileViewer->setWindowTitle(tr("Обозреватель открытых документов"));
 
-    setWindowTitle("Text editor");
+    setWindowTitle(tr("Text editor"));
 }
 
 MainWindow::~MainWindow()
@@ -87,7 +87,7 @@ void MainWindow::saveFileAs(int index)
 {
     QString filename =
             QFileDialog::getSaveFileName(this,
-                                         "Save file",
+                                         tr("Save file"),
                                          QDir::rootPath());
     if(filename.isNull()) return;
 
@@ -104,7 +104,7 @@ void MainWindow::closeFileTab(int index)
         ui->tabWidget->setCurrentIndex(index);
         QMessageBox msgBox;
         msgBox.setText((file->isBinded()?"Файл ":"Файл Без названия") + file->getCurrentFilePath() + " изменен, но не сохранен.");
-        msgBox.setInformativeText("Сохранить изменения?");
+        msgBox.setInformativeText(tr("Сохранить изменения?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
 
@@ -212,9 +212,9 @@ void MainWindow::onOpenFile()
 {
     QString filename =
             QFileDialog::getOpenFileName(this,
-                                         "Open file",
+                                         tr("Open file"),
                                          QDir::rootPath(),
-                                         "Any file (*) ;; C++ file (*.h *.hpp *.cpp);; Python file (*.py)");
+                                         tr("Any file (*) ;; C++ file (*.h *.hpp *.cpp);; Python file (*.py)"));
     if(filename.isNull()) return;
     createFileTab(0,filename);
 }
@@ -323,10 +323,10 @@ ExitDialog::ExitDialog(QStringList unsavedfiles)
     QGridLayout *layout = new QGridLayout;
 
     table = new QTableWidget;
-    label = new QLabel("Сохранить измененные документы?");
-    yes = new QPushButton("Да");
-    no = new QPushButton("Нет");
-    cancel = new QPushButton("Отмена");
+    label = new QLabel(tr("Сохранить измененные документы?"));
+    yes = new QPushButton(tr("Да"));
+    no = new QPushButton(tr("Нет"));
+    cancel = new QPushButton(tr("Отмена"));
 
     layout->addWidget(label, 0, 0, 1, 3);
     layout->addWidget(table, 1, 0, 1, 3);
